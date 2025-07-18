@@ -1,0 +1,20 @@
+package Statement;
+import java.util.*;
+public class print_largest_number {
+    public static void main(String[] args) {
+        Scanner sc =new Scanner(System.in);
+        System.out.print("Value of A:");
+        int a= sc.nextInt();
+        System.out.print("Value of B:");
+        int b= sc.nextInt();
+        if(a<b){
+            System.out.print("B is Largest then A");
+        }
+        else if(a==b){
+            System.out.print("A and B Equal");
+        }
+        else{
+            System.out.print("A is largest then B");
+        }
+    }
+}
