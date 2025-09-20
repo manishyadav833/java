@@ -1,0 +1,36 @@
+package Object_oriented_programming;
+class Base1 {
+    Base1() {
+        System.out.println("I Am a constructor");
+    }
+    Base1(int x){
+        System.out.println("I am a construtor with value of a:" +x );
+    }
+}
+class Derived extends Base1{
+    Derived(){
+//        super(0);
+        System.out.println("I am a derived construtor");
+    }
+    Derived(int x,int y){
+        super(x);
+        System.out.println("I am a coonstrutor of derived with value of y" +y);
+    }
+}
+class childdrive extends Derived{
+    childdrive(){
+        System.out.println("I am child od drive constructor");
+    }
+    childdrive(int x,int y,int z){
+        super(x,y);
+        System.out.println("I am overloaded construtor derived with value of z:" +z);
+    }
+}
+public class constructor_inheritance {
+    public static void main(String[] args) {
+//        Base1 b=new Base1();
+//        Derived d=new Derived(14,15);
+//        childdrive c=new childdrive();
+        childdrive c = new childdrive(2,3,4);
+    }
+}
