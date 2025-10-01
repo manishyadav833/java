@@ -1,0 +1,93 @@
+// File: AccessModifiersDemo.java
+
+// Base class to show all access modifiers
+class Base {
+    public int publicVar = 10;       // Public - accessible everywhere
+    protected int protectedVar = 20; // Protected - same package + subclasses
+    int defaultVar = 30;             // Default - same package only
+    private int privateVar = 40;     // Private - within class only
+
+    // Public method
+    public void publicMethod() {
+        System.out.println("Public Method: Accessible everywhere");
+    }
+
+    // Protected method
+    protected void protectedMethod() {
+        System.out.println("Protected Method: Accessible in same package & subclasses");
+    }
+
+    // Default method
+    void defaultMethod() {
+        System.out.println("Default Method: Accessible only in same package");
+    }
+
+    // Private method
+    private void privateMethod() {
+        System.out.println("Private Method: Accessible only within the class");
+    }
+
+    // Method inside same class can access private
+    public void showPrivate() {
+        System.out.println("Private variable value: " + privateVar);
+        privateMethod(); // Calling private method inside class
+    }
+}
+
+// Subclass in same package
+class SubClassSamePackage extends Base {
+    void showAccess() {
+        // Accessing variables
+        System.out.println("Public Var: " + publicVar);       // ✅ Allowed
+        System.out.println("Protected Var: " + protectedVar); // ✅ Allowed
+        System.out.println("Default Var: " + defaultVar);     // ✅ Allowed (same package)
+        // System.out.println("Private Var: " + privateVar);  // ❌ Not Allowed
+
+        // Accessing methods
+        publicMethod();    // ✅
+        protectedMethod(); // ✅
+        defaultMethod();   // ✅
+        // privateMethod();  // ❌ Not Allowed
+    }
+}
+
+// Subclass in another package (imagine this is in different package)
+// To show only protected & public work
+// For simplicity, writing here
+class SubClassDifferentPackage extends Base {
+    void showAccess() {
+        System.out.println("Public Var: " + publicVar);       // ✅ Allowed
+        System.out.println("Protected Var: " + protectedVar); // ✅ Allowed (through inheritance)
+        // System.out.println("Default Var: " + defaultVar);  // ❌ Not Allowed
+        // System.out.println("Private Var: " + privateVar);  // ❌ Not Allowed
+
+        publicMethod();    // ✅
+        protectedMethod(); // ✅
+        // defaultMethod();   // ❌ Not Allowed
+        // privateMethod();   // ❌ Not Allowed
+    }
+}
+
+// Main Class
+public class AccessModifiersDemo {
+    public static void main(String[] args) {
+        Base base = new Base();
+        System.out.println("--- Inside Main (same package) ---");
+        System.out.println("Public Var: " + base.publicVar);       // ✅
+        System.out.println("Default Var: " + base.defaultVar);     // ✅ (same package)
+        System.out.println("Protected Var: " + base.protectedVar); // ✅ (same package)
+        // System.out.println("Private Var: " + base.privateVar);  // ❌ Not Allowed
+
+        base.publicMethod();     // ✅
+        base.defaultMethod();    // ✅
+        base.protectedMethod();  // ✅
+        // base.privateMethod(); // ❌ Not Allowed
+        base.showPrivate();      // ✅ Access private through public method
+
+        System.out.println("\n--- SubClass in Same Package ---");
+        new SubClassSamePackage().showAccess();
+
+        System.out.println("\n--- SubClass in Different Package (simulated) ---");
+        new SubClassDifferentPackage().showAccess();
+    }
+}
